@@ -6,6 +6,16 @@
         {{ .Content }}
       </article>
 
+      {{ $related := .Site.RegularPages.Related . | first 5 }}
+      {{ with $related }}
+      <h3>See also:</h3>
+      <ul>
+        {{ range . }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
+      </ul>
+      {{ end }}
+
       <ul class="pager blog-pager">
         {{ if .PrevInSection }}
           <li class="previous">
@@ -18,16 +28,6 @@
           </li>
         {{ end }}
       </ul>
-
-      {{ $related := .Site.RegularPages.Related . | first 5 }}
-      {{ with $related }}
-      <h3>See also:</h3>
-      <ul>
-        {{ range . }}
-        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-        {{ end }}
-      </ul>
-      {{ end }}
 
       {{ if (.Params.comments) | or (and (or (not (isset .Params "comments")) (eq .Params.comments nil)) (.Site.Params.comments)) }}
         {{ if .Site.DisqusShortname }}
