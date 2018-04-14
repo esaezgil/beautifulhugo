@@ -5,17 +5,14 @@ var fuseOptions = {
   includeMatches: true,
   threshold: 0,
   tokenize: true,
-  location: 0,
-  distance: 10,
   maxPatternLength: 32,
   minMatchCharLength: 1,
   keys: [
-    {name:"title",weight:1},
-    {name:"description",weight:0.00000001},
-    {name:"keywords",weight:0.00000001},
-    {name:"tags",weight:0.000001},
-    {name:"contents",weight:0.00000001}
-  ]
+    {name:"title", weight:0.9},
+    {name:"description", weight:0.4},
+    {name:"tags", weight:0.8},
+    {name:"contents", weight:0.2},
+    ]
 };
 
 var searchQuery = param("s");
@@ -23,7 +20,7 @@ if(searchQuery){
   $("#search-query").val(searchQuery);
   executeSearch(searchQuery);
 }else {
-  $('#search-results').append("<h4><p>Please enter a word or phrase above</p></h4>");
+  $('#search-results').append("<div align="center"><h4><p>Please enter a word or phrase above</p></h4></div>");
 
 }
 

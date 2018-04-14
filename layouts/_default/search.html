@@ -20,13 +20,11 @@
 
 {{ define "main" }}
 <section id="search-section">
-  <div align="center" id='asd'>
+  <div align="center">
     <form action="{{"search" | absURL }}">
       <input id="search-query" name="s" type="text" placeholder="Enter text to search" style="text-align:center" />
     </form>
-    <div id="search-help-text">
       <h3>Relevant content in my site</h3>
-    </div>
   </div>
   <div id="search-results" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-0"></div>
 </section>
