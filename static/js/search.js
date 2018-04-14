@@ -20,7 +20,7 @@ if(searchQuery){
   $("#search-query").val(searchQuery);
   executeSearch(searchQuery);
 }else {
-  $('#search-results').append("<div align="center"><h4><p>Please enter a word or phrase above</p></h4></div>");
+  $('#search-results').append("<div align=\"center\"><h4><p>Please enter a word or phrase above</p></h4></div>");
 
 }
 
