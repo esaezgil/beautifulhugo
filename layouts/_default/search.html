@@ -1,27 +1,47 @@
-{{ define "footerfiles" }}
+{{ define "header" }}
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.0/fuse.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js"></script>
 <script src="{{ "js/search.js" | absURL }}"></script>
-{{ end }}
+
+<header class="header-section">
+  <div class="intro-header no-img">
+    <div class="container">
+      <div class="row">
+          <div class="page-heading">
+            <h1>{{ .Title }}</h1>
+            <hr class="small">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+{{end}}
+
 {{ define "main" }}
-<section class="resume-section p-3 p-lg-5 d-flex flex-column">
-  <div class="my-auto" >
-    <form action="{{ "search" | absURL }}">
-      <input id="search-query" name="s"/>
+<section id="search-section">
+  <div align="center" id='asd'>
+    <form action="{{"search" | absURL }}">
+      <input id="search-query" name="s" type="text" placeholder="Enter text to search" style="text-align:center" />
     </form>
-    <div id="search-results">
-     <h3>Matching pages</h3>
+    <div id="search-help-text">
+      <h3>Relevant content in my site</h3>
     </div>
   </div>
+  <div id="search-results" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-0"></div>
 </section>
+
+
+
 <!-- this template is sucked in by search.js and appended to the search-results div above. So editing here will adjust style -->
 <script id="search-result-template" type="text/x-js-template">
+
     <div id="summary-${key}">
-      <h4><a href="${link}">${title}</a></h4>
-      <p>${snippet}</p>
-      ${ isset tags }<p>Tags: ${tags}</p>${ end }
-      ${ isset categories }<p>Categories: ${categories}</p>${ end }
+        <h4><a href="${link}">${title}</a></h4>
+        <p>${snippet}</p>
+        <h4>${ isset keywords }<p>keywords: ${keywords}</p>${ end }</h4>
+        <h4>${ isset contents }<p>contents: ${contents}</p>${ end }</h4>
+        <h4>${ isset description }<p>description: ${description}</p>${ end }</h4>
     </div>
 </script>
 {{ end }}

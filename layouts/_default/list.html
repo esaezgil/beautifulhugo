@@ -37,7 +37,7 @@
               </a>
 
               <p class="post-meta">
-                {{ default (i18n "dateFormat") .Site.Params.dateformat | .Date.Format | i18n "postedOnDate" }}
+                {{ partial "post_meta.html" . }}
               </p>
               <div class="post-entry">
                 {{ if .Truncated }}
@@ -51,7 +51,7 @@
               {{ if .Params.tags }}
                 <span class="post-meta">
                   {{ range .Params.tags }}
-                    #<a href="{{ $.Site.LanguagePrefix | absURL }}tags/{{ . | urlize }}/">{{ . }}</a>&nbsp;
+                    #<a href="{{ $.Site.LanguagePrefix | absURL }}/tags/{{ . | urlize }}/">{{ . }}</a>&nbsp;
                   {{ end }}
                 </span>
               {{ end }}
@@ -63,12 +63,12 @@
           <ul class="pager main-pager">
             {{ if .Paginator.HasPrev }}
               <li class="previous">
-                <a href="{{ .URL }}page/{{ .Paginator.Prev.PageNumber }}">&larr; {{ i18n "newerPosts" }}</a>
+                <a href="{{ .URL }}page/{{ .Paginator.Prev.PageNumber }}/">&larr; {{ i18n "newerPosts" }}</a>
               </li>
             {{ end }}
             {{ if .Paginator.HasNext }}
               <li class="next">
-                <a href="{{ .URL }}page/{{ .Paginator.Next.PageNumber }}">{{ i18n "olderPosts" }} &rarr;</a>
+                <a href="{{ .URL }}page/{{ .Paginator.Next.PageNumber }}/">{{ i18n "olderPosts" }} &rarr;</a>
               </li>
             {{ end }}
           </ul>
@@ -77,4 +77,3 @@
     </div>
   </div>
 {{ end }}
-

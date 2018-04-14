@@ -3,41 +3,39 @@ summaryInclude=60;
 var fuseOptions = {
   shouldSort: true,
   includeMatches: true,
-  threshold: 0.0,
-  tokenize:true,
+  threshold: 0,
+  tokenize: true,
   location: 0,
-  distance: 100,
+  distance: 10,
   maxPatternLength: 32,
   minMatchCharLength: 1,
   keys: [
-    {name:"title",weight:0.8},
-    {name:"contents",weight:0.5},
-    {name:"description",weight:0.3},
-    {name:"keywords",weight:0.3}
+    {name:"title",weight:1},
+    {name:"description",weight:0.00000001},
+    {name:"keywords",weight:0.00000001},
+    {name:"tags",weight:0.000001},
+    {name:"contents",weight:0.00000001}
   ]
 };
-
 
 var searchQuery = param("s");
 if(searchQuery){
   $("#search-query").val(searchQuery);
   executeSearch(searchQuery);
 }else {
-  $('#search-results').append("<p>Please enter a word or phrase above</p>");
+  $('#search-results').append("<h4><p>Please enter a word or phrase above</p></h4>");
+
 }
-
-
 
 function executeSearch(searchQuery){
   $.getJSON( "/index.json", function( data ) {
     var pages = data;
     var fuse = new Fuse(pages, fuseOptions);
     var result = fuse.search(searchQuery);
-    console.log({"matches":result});
     if(result.length > 0){
       populateResults(result);
     }else{
-      $('#search-results').append("<p>No matches found</p>");
+      $('#search-results').append("<h4><p>Sorry, no matches found</p></h4>");
     }
   });
 }
@@ -54,6 +52,7 @@ function populateResults(result){
       $.each(value.matches,function(matchKey,mvalue){
         if(mvalue.key == "keywords" || mvalue.key == "description" ){
           snippetHighlights.push(mvalue.value);
+          // console.log(mvalue.value);
         }else if(mvalue.key == "contents"){
           start = mvalue.indices[0][0]-summaryInclude>0?mvalue.indices[0][0]-summaryInclude:0;
           end = mvalue.indices[0][1]+summaryInclude<contents.length?mvalue.indices[0][1]+summaryInclude:contents.length;
@@ -69,11 +68,13 @@ function populateResults(result){
     //pull template from hugo templarte definition
     var templateDefinition = $('#search-result-template').html();
     //replace values
-    var output = render(templateDefinition,{key:key,title:value.item.title,link:value.item.permalink,tags:value.item.tags,categories:value.item.categories,snippet:snippet});
+    var output = render(templateDefinition,{key:key,title:value.item.title,link:value.item.permalink,tags:value.item.tags,categories:value.item.categories,snippet:snippet+ "..."});
     $('#search-results').append(output);
-
+    var context = document.querySelector("#summary-"+key);
     $.each(snippetHighlights,function(snipkey,snipvalue){
-      $("#summary-"+key).mark(snipvalue);
+      var instance = new Mark(context);
+      instance.mark(snipvalue);
+      // $("#summary-"+key).mark(snipvalue);
     });
 
   });
