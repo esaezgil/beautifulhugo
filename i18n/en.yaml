@@ -62,3 +62,16 @@
   translation: "Your email address"
 - id: yourWebsite
   translation: "You website"
+<<<<<<< HEAD
+=======
+
+# Delayed Disqus
+- id: show
+  translation: "Show"
+- id: comments
+  translation: "comments" 
+
+# Related posts
+- id: seeAlso
+  translation: "See also"
+>>>>>>> 07f765675dab2b00ad39aa460118edff2f2d3fcd
