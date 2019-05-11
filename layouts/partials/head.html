@@ -32,23 +32,6 @@
   <meta property="og:title" content="{{ . }}" />
   <meta name="twitter:title" content="{{ . | truncate 70 }}" />
 {{- end }}
-<<<<<<< HEAD
-{{ if .Description }}
-<meta name="description" content="{{ .Description }}">
-<meta property="og:description" content="{{ .Description }}">
-<meta name="twitter:description" content="{{ .Description | truncate 200 }}">
-{{ else if .IsPage }}
-<meta name="description" content="{{ .Summary | plainify }}">
-<meta property="og:description" content="{{ .Summary | plainify }}">
-<meta name="twitter:description" content="{{ .Summary | plainify | truncate 200 }}">
-{{ else }}
-<meta name="description" content="Enrique Saez Gil personal website and blog. Software, projects, open source, hackathons, meetups, reviews and books.">
-<meta property="og:description" content="Enrique Saez Gil personal website and blog. Software, projects, open source, hackathons, meetups, reviews and books.">
-<meta name="twitter:description" content="Enrique Saez Gil personal website and blog. Software, projects, open source, hackathons, meetups, reviews and books.">
-software, books, open source, events
-{{ end }}
-  <meta name="author" content="{{ .Site.Author.name }}"/>
-=======
 {{- with ($.Scratch.Get "Description") }}
   <meta name="description" content="{{ . }}">
   <meta property="og:description" content="{{ . }}">
@@ -58,7 +41,6 @@ software, books, open source, events
   <meta name="author" content="{{ . }}"/>
 {{- end }}
 {{- partial "seo/main.html" . }}  
->>>>>>> 07f765675dab2b00ad39aa460118edff2f2d3fcd
 {{- with .Site.Params.favicon }}
   <link href='{{ . | absURL }}' rel='icon' type='image/x-icon'/>
 {{- end -}}
